@@ -1,0 +1,75 @@
+.App{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    min-height: 100vh;
+    height: auto;
+    width: 100vw;
+    background-color: #213547;
+}
+
+.wrap-search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    gap:20px;
+}
+.search {
+    margin: 20px 0 20px 0 ;
+    width: 100%;
+    height: 45px;
+    font-size: 20px;
+    border-radius: 5px;
+    border: none;
+    padding-left: 10px;
+}
+.wrap-search button{
+    height: 47px;
+    border-radius: 5px;
+    background-color: #6ee7b7;
+    border: none;
+}
+.wrap-search button:hover{
+    background-color: rgba(110, 231, 183, 0.46);
+}
+.wrap-DDC{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 90%;
+    height: auto;
+}
+.list-item{
+    display: flex;
+    align-items: center;
+    height: 50px;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+    background: #fff;
+    width: 100%;
+    gap:10px;
+}
+.list-item input{
+    margin-left: 10px;
+    height: 25px;
+    width: 25px;
+}
+
+.wrap-DDC div{
+    width: 100%;
+}
+.wrap-DDC div div{
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+.loading{
+    font-size: 20px;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    color: white;
+}
