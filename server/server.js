@@ -5,7 +5,7 @@ const router = require('./router/index');
 const PORT = 3001;
 const corsOptions = {
     credentials: true,
-    origin: 'http://localhost:5173',
+    origin: 'https://search-app2412.vercel.app',
     optionSuccessStatus:200,
     exposedHeaders: ['X-Total-Count'],
 }
