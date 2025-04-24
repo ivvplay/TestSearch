@@ -6,7 +6,7 @@ import {IResponceSortData} from "./models/responce/IResponceSortData.ts";
 import './styles/App.css'
 
 function App() {
-
+    const URL = 'https://test-search2412.vercel.app'
     const [str, setStr] = useState<IResponseData[]>([])
     const [fetching, setFetching] = useState<boolean>(true)
     const [update, setUpdate] = useState<boolean>(false)
@@ -16,7 +16,7 @@ function App() {
 
     useEffect(() => {
         if(fetching){
-            axios.get<IResponseData[]>(`http://localhost:3001/api/items?limit=20&page=${currentPage}&q=${search}`)
+            axios.get<IResponseData[]>(`${URL}/api/items?limit=20&page=${currentPage}&q=${search}`)
                 .then(res => {
                     setStr(p => [...p, ...res.data])
                     setCurrentPage(p => p + 1)
@@ -35,7 +35,7 @@ function App() {
 
     useEffect(() => {
         if(update){
-            axios.put<IResponceSortData>('http://localhost:3001/api/items_sort',{str,search})
+            axios.put<IResponceSortData>(`${URL}/api/items_sort`,{str,search})
                 .finally(() => setUpdate(false))
         }
     }, [update]);
