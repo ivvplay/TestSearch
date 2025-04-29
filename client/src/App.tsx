@@ -4,6 +4,7 @@ import {DragDropContext, Droppable, Draggable, DropResult, DragStart} from '@hel
 import {IResponseData} from "./models/responce/IResponceData.ts";
 import {IResponceSortData} from "./models/responce/IResponceSortData.ts";
 import './styles/App.css'
+import {IPosition} from "./models/IPosition.ts";
 
 function App() {
     const URL = 'https://test-search2412.vercel.app'
@@ -13,6 +14,11 @@ function App() {
     const [currentPage, setCurrentPage] = useState<number>(1)
     const [search, setSearch] = useState<string>('')
     const totalCountRef = useRef(0);
+    const [updateItem, setUpdateItem] = useState<IResponseData>()
+    const [position, setPosition] = useState<IPosition>({
+        up: undefined,
+        down: undefined
+    })
 
     useEffect(() => {
         if(fetching){
@@ -35,8 +41,12 @@ function App() {
 
     useEffect(() => {
         if(update){
-            axios.put<IResponceSortData>(`${URL}/api/items_sort`,{str,search})
+            axios.put<IResponceSortData>(`${URL}/api/items_sort`,{updateItem, position})
                 .finally(() => setUpdate(false))
+            setPosition({
+                up: undefined,
+                down: undefined
+            })
         }
     }, [update]);
 
@@ -60,6 +70,11 @@ function App() {
             item.id === id ?
                 {...item, selected: e.target.checked}: item
         ))
+        const updatedItem = str.find(item => item.id === id);
+        if (updatedItem) {
+            updatedItem.selected = e.target.checked;
+            setUpdateItem({...updatedItem});
+        }
         setUpdate(true)
     }
 
@@ -68,6 +83,11 @@ function App() {
         const newItems: IResponseData[] = [...str];
         const [movedItem] = newItems.splice(result.source.index, 1);
         newItems.splice(result.destination.index, 0, movedItem);
+        setUpdateItem(movedItem);
+        setPosition({
+            up: newItems[result.destination.index - 1] ?? undefined,
+            down: newItems[result.destination.index + 1] ?? undefined
+        })
         setStr(newItems);
         if(search === '') setUpdate(true)
     };

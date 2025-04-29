@@ -15,7 +15,6 @@ class DataController {
 
     async getItems(req, res) {
         try {
-            console.log('Получить данные')
             const page = req.query.page || 1;
             const limit = req.query.limit || 20;
             const search = req.query.q || '';
@@ -33,8 +32,6 @@ class DataController {
                 paginatedData
             );
 
-            console.log('ответ отправил')
-
         }
         catch (error) {
             console.log(error);
@@ -43,16 +40,35 @@ class DataController {
 
     async updateItems(req, res) {
         try {
-            console.log('Обновление')
-            const {str, search} = req.body;
-            if(search === '')
-            {
-                this.setData([...str,...this.data.slice(str.length)])
+            const {updateItem, position} = req.body;
+
+            if(Object.keys(position).length === 0) {
+                this.setData(this.data.map(item =>
+                    item.id === updateItem.id ? updateItem : item
+                ))
             }
             else{
-                const strMap = new Map(str.map(item => [item.id, item]));
-                this.setData(this.data.map(item => strMap.get(item.id) || item))
+                const result = [...this.data]
+                const indexMap = new Map();
+                result.forEach((item, index) => indexMap.set(item.id, index));
+                if('up' in position && 'down' in position || 'down' in position ){
+                    const dIdx = indexMap.get(updateItem.id);
+                    const rIdx = indexMap.get(position.down.id);
+                    result.splice(dIdx, 1);
+                    const cIdx = dIdx < rIdx ? rIdx - 1 : rIdx;
+
+                    result.splice(cIdx, 0, updateItem);
+                    this.setData(result);
+                }
+                else if('up' in position){
+                    const dIdx = indexMap.get(updateItem.id);
+                    const rIdx = indexMap.get(position.up.id);
+                    result.splice(dIdx, 1);
+                    result.splice(rIdx, 0, updateItem);
+                    this.setData(result);
+                }
             }
+
             res.status(200).json({
                 message: 'Data updated successfully',
             });

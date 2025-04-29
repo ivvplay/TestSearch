@@ -1,6 +1,7 @@
 import {IResponseData} from "./IResponceData.ts";
+import {IPosition} from "../IPosition.ts";
 
 export interface IResponceSortData {
-    data: IResponseData;
-    search: string;
+    updateItem: IResponseData | undefined;
+    positions: IPosition | undefined;
 }
