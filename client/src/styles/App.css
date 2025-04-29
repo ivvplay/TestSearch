@@ -17,6 +17,10 @@
     width: 90%;
     gap:20px;
 }
+.wrap-search input{
+    background-color: white;
+}
+
 .search {
     margin: 20px 0 20px 0 ;
     width: 100%;
@@ -51,8 +55,10 @@
     background: #fff;
     width: 100%;
     gap:10px;
+    color: black;
 }
 .list-item input{
+    background-color: white;
     margin-left: 10px;
     height: 25px;
     width: 25px;
