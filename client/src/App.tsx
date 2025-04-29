@@ -28,9 +28,25 @@ function App() {
                     setCurrentPage(p => p + 1)
                     totalCountRef.current = res.data.length*currentPage;
                 })
-                .finally(() => setFetching(false))
+                .finally(() => setFetching(false))//2
         }
     }, [fetching]);
+
+    useEffect(() => {
+        const handleBeforeUnload = (event:BeforeUnloadEvent) => {
+            if (update) {
+                event.preventDefault();
+                event.returnValue = 'У вас есть несохраненные изменения!';
+                return event.returnValue;
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [update]);
 
     useEffect(() => {
         document.addEventListener('scroll', scrollHandler)
