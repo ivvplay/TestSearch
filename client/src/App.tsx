@@ -53,18 +53,16 @@ function App() {
 
     const scrollHandler = (e:Event) => {
         if(document.documentElement.scrollHeight - (window.innerHeight + document.documentElement.scrollTop) < 100
-            && totalCountRef.current < 100) {
+            && totalCountRef.current < 1000000) {
             setFetching(true);
         }
     }
 
     const onSearch = (e:ChangeEvent<HTMLInputElement>) => {
-        if(!fetching){
             setStr([])
             setSearch(e.target.value)
             setFetching(true);
             setCurrentPage(1);
-        }
     }
 
     const onCheck= (e:ChangeEvent<HTMLInputElement>, id:string) => {
