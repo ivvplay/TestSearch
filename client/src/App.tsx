@@ -89,7 +89,7 @@ function App() {
             down: newItems[result.destination.index + 1] ?? undefined
         })
         setStr(newItems);
-        if(search === '') setUpdate(true)
+        setUpdate(true)
     };
 
     return (
@@ -107,7 +107,7 @@ function App() {
                 <DragDropContext
                     onDragEnd={handleDragEnd}
                 >
-                    <Droppable droppableId='list-1'>
+                    <Droppable droppableId='list-1' isDropDisabled={update}>
                         {(provided) => (
                             <div ref={provided.innerRef} {...provided.droppableProps}>
                                 {str.map((item, index) => (
