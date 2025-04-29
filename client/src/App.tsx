@@ -59,10 +59,12 @@ function App() {
     }
 
     const onSearch = (e:ChangeEvent<HTMLInputElement>) => {
-        setStr([])
-        setSearch(e.target.value)
-        setFetching(true);
-        setCurrentPage(1);
+        if(!fetching){
+            setStr([])
+            setSearch(e.target.value)
+            setFetching(true);
+            setCurrentPage(1);
+        }
     }
 
     const onCheck= (e:ChangeEvent<HTMLInputElement>, id:string) => {
