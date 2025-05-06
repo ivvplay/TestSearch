@@ -1,0 +1,20 @@
+services:
+  front:
+    container_name: front
+    image: front
+    build:
+      context: client
+    depends_on:
+      - back
+    ports:
+      - "5222:5222"
+    restart: always
+  back:
+    container_name: back
+    image: backend
+    build:
+      context: server
+    ports:
+      - "3001:3001"
+    restart: always
+

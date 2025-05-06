@@ -7,7 +7,8 @@ import './styles/App.css'
 import {IPosition} from "./models/IPosition.ts";
 
 function App() {
-    const URL = 'https://test-search2412.vercel.app'
+    // const URL = 'https://test-search2412.vercel.app'
+    const URL = "http://localhost:3001"
     const [str, setStr] = useState<IResponseData[]>([])
     const [fetching, setFetching] = useState<boolean>(true)
     const [update, setUpdate] = useState<boolean>(false)
